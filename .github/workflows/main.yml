@@ -25,5 +25,4 @@ jobs:
         SERVER_HOST: 13.200.206.229
         SERVER_USER: ubuntu
         TARGET_PATH: /www/wwwroot/vtztraveling.work.gd
-      run: |
-        rsync -avz --delete ./dist/ $SERVER_USER@$SERVER_HOST:$TARGET_PATH
+

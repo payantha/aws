@@ -23,6 +23,6 @@ jobs:
     - name: Deploy Website
       env:
         SERVER_HOST: 13.200.206.229
-        SERVER_USER: ubuntu
+        SERVER_USER: root
         TARGET_PATH: /www/wwwroot/vtztraveling.work.gd
 

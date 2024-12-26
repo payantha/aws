@@ -1,0 +1,29 @@
+name: Send File via SSH
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  send-file:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout Code
+      uses: actions/checkout@v3
+
+    - name: Set up SSH
+      run: |
+        mkdir -p ~/.ssh
+        echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
+        chmod 600 ~/.ssh/id_rsa
+        ssh-keyscan -H ${{ env.SERVER_HOST }} >> ~/.ssh/known_hosts
+
+    - name: Send File
+      env:
+        SERVER_HOST: 13.200.206.229
+        SERVER_USER: ubuntu
+        TARGET_PATH: /www/wwwroot/vtztraveling.work.gd
+      run: |
+        scp -i ~/.ssh/id_rsa ./path/to/your/file.txt $SERVER_USER@$SERVER_HOST:$TARGET_PATH

@@ -18,12 +18,12 @@ jobs:
         mkdir -p ~/.ssh
         echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
         chmod 600 ~/.ssh/id_rsa
-        ssh-keyscan -H ${{ env.SERVER_HOST }} >> ~/.ssh/known_hosts
+        ssh-keyscan -H ${{ secrets.SERVER_HOST }} >> ~/.ssh/known_hosts
 
     - name: Send File
       env:
-        SERVER_HOST: 13.200.206.229
-        SERVER_USER: ubuntu
+        SERVER_HOST: ${{ secrets.SERVER_HOST }}
+        SERVER_USER: ${{ secrets.SERVER_USER }}
         TARGET_PATH: /www/wwwroot/vtztraveling.work.gd
       run: |
         scp -i ~/.ssh/id_rsa ./path/to/your/file.txt $SERVER_USER@$SERVER_HOST:$TARGET_PATH
